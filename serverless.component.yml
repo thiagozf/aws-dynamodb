@@ -1,7 +1,7 @@
-name: aws-dynamodb
-version: 0.0.2
-author: ac360
-org: serverlessinc
+name: thiagozf-aws-dynamodb
+version: 0.0.1
+author: thiagozf
+org: thiagozf
 description: Deploys A AWS DynamoDB Table
 keywords: aws, serverless, dynamodb, database
 repo: https://github.com/owner/project

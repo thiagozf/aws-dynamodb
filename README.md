@@ -82,15 +82,15 @@ $ serverless deploy --debug
 The `aws-dynamodb` component requires minimal configuration with built-in sane defaults. Here's a complete reference of the `serverless.yml` file for the `aws-dynamodb` component:
 
 ```yml
-component: aws-dynamodb          # (required) name of the component. In that case, it's aws-dynamodb.
-name: my-table                   # (required) name of your instance.
-org: serverlessinc               # (optional) serverless dashboard org. default is the first org you created during signup.
-app: myApp                       # (optional) serverless dashboard app. default is the same as the name property.
-stage: dev                       # (optional) serverless dashboard stage. default is dev.
+component: aws-dynamodb # (required) name of the component. In that case, it's aws-dynamodb.
+name: my-table # (required) name of your instance.
+org: serverlessinc # (optional) serverless dashboard org. default is the first org you created during signup.
+app: myApp # (optional) serverless dashboard app. default is the same as the name property.
+stage: dev # (optional) serverless dashboard stage. default is dev.
 
 inputs:
   name: my-table
-  attributeDefinitions:                    
+  attributeDefinitions:
     - AttributeName: id
       AttributeType: S
     - AttributeName: attribute1
@@ -117,6 +117,11 @@ inputs:
       Projection:
         ProjectionType: 'KEYS_ONLY'
   region: us-east-1
+  stream:
+    StreamEnabled: true
+    StreamViewType: NEW_AND_OLD_IMAGES
+  replicas:
+    - RegionName: sa-east-1
 ```
 
 Once you've chosen your configuration, run `serverless deploy` again (or simply just `serverless`) to deploy your changes.
@@ -133,7 +138,7 @@ $ serverless dev
 
 ### 6. Monitor
 
-Anytime you need to know more about your running `aws-dynamodb` instance, you can run the following command to view the most critical info. 
+Anytime you need to know more about your running `aws-dynamodb` instance, you can run the following command to view the most critical info.
 
 ```
 $ serverless info
@@ -141,14 +146,16 @@ $ serverless info
 
 This is especially helpful when you want to know the outputs of your instances so that you can reference them in another instance. It also shows you the status of your instance, when it was last deployed, and how many times it was deployed. You will also see a url where you'll be able to view more info about your instance on the Serverless Dashboard.
 
-To digg even deeper, you can pass the `--debug` flag to view the state of your component instance in case the deployment failed for any reason. 
+To digg even deeper, you can pass the `--debug` flag to view the state of your component instance in case the deployment failed for any reason.
 
 ```
 $ serverless info --debug
 ```
+
 ### 7. Remove
 
-If you wanna tear down your entire `aws-dynamodb` infrastructure that was created during deployment, just run the following command in the directory containing the `serverless.yml` file. 
+If you wanna tear down your entire `aws-dynamodb` infrastructure that was created during deployment, just run the following command in the directory containing the `serverless.yml` file.
+
 ```
 $ serverless remove
 ```
